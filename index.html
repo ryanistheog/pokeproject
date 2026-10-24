@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pokémon: Ultimate Adventure</title>
+<style>
+:root{--bg:#0b1220;--panel:#141f33;--panel2:#1b2942;--text:#f4f7ff;--muted:#a7b5cc;--yellow:#ffd34e;--blue:#5fa8ff;--green:#5be0a0;--red:#ff7373}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#1b3152,var(--bg) 58%);color:var(--text);font:15px/1.45 system-ui,Segoe UI,Arial,sans-serif}header{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;background:#0b1220ed;border-bottom:1px solid #34445e;backdrop-filter:blur(12px)}.brand{font-weight:1000;font-size:clamp(18px,3vw,26px);letter-spacing:-.6px}.brand span{color:var(--yellow)}.stats{display:flex;gap:7px;flex-wrap:wrap}.pill{background:#1c2a43;border:1px solid #34445e;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800}.worldmap{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;margin:14px 0}.place{position:relative;min-height:135px;overflow:hidden;text-align:left;background:linear-gradient(145deg,#234a56,#18243a);border:1px solid #45677c;border-radius:15px;padding:14px;color:#fff;cursor:pointer}.place .emoji{font-size:30px;display:block;margin-bottom:8px}.place b{display:block;font-size:16px}.place small{color:#c3d8e8}.place:hover{transform:translateY(-2px);border-color:#ffd34e}.place.active-place{outline:2px solid #ffd34e}nav{display:flex;gap:8px;padding:12px 20px;overflow:auto;border-bottom:1px solid #24344d;background:#101a2b}nav button,.btn{border:0;border-radius:10px;padding:10px 13px;font-weight:850;cursor:pointer;background:#253752;color:white;white-space:nowrap}nav button.active,.btn.primary{background:var(--yellow);color:#20283a}button:hover{filter:brightness(1.1)}button:disabled{opacity:.4;cursor:not-allowed}main{max-width:1200px;margin:auto;padding:20px}.page{display:none}.page.active{display:block}.hero{background:linear-gradient(110deg,#253c60,#18233a);border:1px solid #3a5072;border-radius:20px;padding:22px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:12px}.hero h1{font-size:clamp(26px,5vw,46px);line-height:1.05;margin:0 0 12px}.hero p,.muted{color:var(--muted)}.hero img{width:100%;max-height:250px;object-fit:contain;filter:drop-shadow(0 12px 16px #0006)}.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:22px 0 12px}.sectionhead h2{margin:0}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px}.card{background:linear-gradient(160deg,#1a2942,#131e31);border:1px solid #2c405d;border-radius:16px;padding:12px;min-width:0}.mon{cursor:pointer;text-align:center;transition:transform .15s}.mon:hover{transform:translateY(-3px)}.mon img{width:100%;height:125px;object-fit:contain;image-rendering:auto}.mon h3{margin:2px 0 4px;text-transform:capitalize}.tag{display:inline-block;border-radius:7px;padding:3px 7px;background:#2a4264;color:#dceaff;font-size:11px;font-weight:800;margin:2px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}.box{background:#111c2e;border:1px solid #2d405e;border-radius:14px;padding:14px;margin:10px 0}.formrow{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.formrow input,.formrow select,input,select{min-width:0;padding:10px;border-radius:9px;border:1px solid #3b4d69;background:#0c1728;color:white}.formrow input{flex:1}.btn.small{padding:7px 9px;font-size:12px}.btn.green{background:#185b49}.btn.red{background:#6a2935}.btn.gold{background:#66511c}.notice{border:1px solid #8b712e;background:#352c17;color:#ffe9a6;border-radius:12px;padding:11px 13px;margin:12px 0}.battle{display:grid;grid-template-columns:1fr 1fr;gap:14px}.fighter{text-align:center}.fighter img{height:170px;max-width:100%;object-fit:contain;transition:filter .25s,transform .25s}.fighter img.tera-active{filter:drop-shadow(0 0 12px #c084fc) drop-shadow(0 0 24px #60a5fa) saturate(1.35);transform:scale(1.06)}.hp{height:9px;background:#34445e;border-radius:99px;overflow:hidden;margin:7px 0}.hp i{display:block;height:100%;background:var(--green)}.log{background:#091321;border-radius:10px;padding:12px;min-height:50px;margin:10px 0;color:#dbeafe}.moves{display:grid;grid-template-columns:1fr 1fr;gap:8px}.moves button{white-space:normal;text-align:left}.moves small{display:block;opacity:.7}.empty{color:var(--muted);padding:25px;text-align:center;border:1px dashed #40516b;border-radius:12px}.footer{text-align:center;color:#8798b2;font-size:12px;padding:20px}.badge{display:inline-block;background:#443b1b;border:1px solid #8c7331;color:#ffe18a;border-radius:8px;padding:6px 10px;font-weight:900;margin:3px}@media(max-width:720px){header{align-items:flex-start;flex-direction:column}main{padding:12px}.hero{grid-template-columns:1fr}.hero img{max-height:160px}.split,.battle{grid-template-columns:1fr}.fighter img{height:130px}.grid{grid-template-columns:repeat(auto-fill,minmax(125px,1fr))}}
+</style>
+</head>
+<body>
+<header><div class="brand">⚡ POKÉMON <span>ULTIMATE ADVENTURE</span></div><div class="stats"><span class="pill">🪙 Coins: <b id="coins">100</b></span><span class="pill">🍓 Berries: <b id="berries">5</b></span><span class="pill">🔴 Balls: <b id="balls">10</b></span><span class="pill">🏅 Badges: <b id="badges">0</b>/8</span></div></header>
+<nav>
+<button class="active" data-page="home">🏠 Home</button><button data-page="map">🗺️ World Map</button><button data-page="pokedex">📘 Pokédex</button><button data-page="bag">🎒 Bag</button><button data-page="battle">⚔️ Battle</button><button data-page="gyms">🏆 Gyms</button>
+</nav>
+<main>
+<section class="page" id="map">
+<div class="sectionhead"><h2>🗺️ Adventure Map</h2><span class="muted">Choose a destination to explore</span></div>
+<div class="hero"><div><span class="tag">CURRENT DESTINATION</span><h1 id="currentPlaceTitle">Pallet Town</h1><p id="currentPlaceDesc">Start your journey in the peaceful hometown where every great trainer begins.</p><button class="btn primary" onclick="explorePlace()">🌾 Explore this place</button></div><div style="font-size:100px;text-align:center">🧭</div></div>
+<div class="worldmap" id="worldMapGrid"></div>
+<div class="notice">Select a place, then press Explore to discover a wild Pokémon. Different destinations favor different Pokémon types. Gym cities also link to the Gym Challenge.</div>
+</section>
+<section class="page active" id="home">
+<div class="hero"><div><span class="tag">LOCAL RPG PROTOTYPE</span><h1>Your journey.<br>Your Pokémon.<br>Your rules.</h1><p>Explore the roster, catch Pokémon, train your team, challenge gyms, and choose your battle transformations.</p><div class="row"><button class="btn primary" onclick="go('pokedex')">Browse Pokémon</button><button class="btn" onclick="newWild()">Find a wild Pokémon</button></div></div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pikachu artwork"></div>
+<div class="notice"><b>Prototype status:</b> This game saves to this browser only. It is not connected to a live Pokémon game server or online player accounts. Artwork loads from an external source and needs internet.</div>
+<div class="sectionhead"><h2>🌟 Featured Pokémon</h2><button class="btn small" onclick="go('pokedex')">View all</button></div><div class="grid" id="featured"></div>
+<div class="sectionhead"><h2>🧢 Your active team</h2><button class="btn small" onclick="go('bag')">Manage team</button></div><div class="grid" id="homeTeam"></div>
+</section>
+<section class="page" id="pokedex">
+<div class="sectionhead"><h2>📘 Pokémon Library</h2><span class="muted" id="dexCount"></span></div>
+<div class="formrow"><input id="search" placeholder="Search Pokémon by name..." oninput="renderDex()"><select id="typeFilter" onchange="renderDex()"><option value="">All types</option><option>Normal</option><option>Fire</option><option>Water</option><option>Electric</option><option>Grass</option><option>Ice</option><option>Fighting</option><option>Poison</option><option>Ground</option><option>Flying</option><option>Psychic</option><option>Bug</option><option>Rock</option><option>Ghost</option><option>Dragon</option><option>Steel</option><option>Fairy</option></select></div>
+<p class="muted">Browse the original 151 Kanto Pokémon plus Meltan and Melmetal. Select a Pokémon to view its details; catch it in battle before adding it to your team.</p><div class="grid" id="dexGrid"></div>
+</section>
+<section class="page" id="bag">
+<div class="sectionhead"><h2>🎒 Bag & caught Pokémon</h2><span class="muted">Your collection</span></div>
+<div class="split"><div class="card"><h3>🧢 Caught Pokémon</h3><p class="muted">Pokémon you catch appear here. Choose up to six for your team.</p><div class="grid" id="caughtGrid"></div></div><div class="card"><h3>🍓 Items</h3><div id="itemsPanel"></div><div class="box"><b>🪙 Pokémon Supply Shop</b><p class="muted">Earn coins by defeating wild Pokémon and winning Gym battles. Spend your coins here on Poké Balls, healing Berries, and Potions.</p><div class="row"><button class="btn small" onclick="buy('balls')">Buy 5 Poké Balls · 20 coins</button><button class="btn small" onclick="buy('berries')">Buy 3 Berries · 15 coins</button><button class="btn small" onclick="buy('potions')">Buy 2 Potions · 25 coins</button></div></div></div></div>
+</section>
+<section class="page" id="battle">
+<div class="sectionhead"><h2>⚔️ Battle Arena</h2><div class="row"><button class="btn" onclick="newWild()">🌾 Wild encounter</button><button class="btn gold" onclick="gymBattle()">🏆 Gym challenge</button></div></div>
+<div class="battle card"><div class="fighter"><div id="enemyLabel" class="tag">Wild Pokémon</div><img id="enemyImg" alt="Opponent artwork"><h3 id="enemyName">No opponent</h3><div class="hp"><i id="enemyHp" style="width:100%"></i></div><small id="enemyStats" class="muted"></small></div><div class="fighter"><div class="tag">Your active Pokémon</div><img id="playerImg" alt="Your Pokémon artwork"><h3 id="playerName">Choose a Pokémon</h3><div class="hp"><i id="playerHp" style="width:100%"></i></div><small id="playerStats" class="muted"></small></div></div>
+<div class="log" id="battleLog" aria-live="polite">Find a wild Pokémon to begin your adventure.</div>
+<div class="sectionhead"><h3>Choose your move</h3></div><div class="moves"><button class="btn" onclick="attack('Quick Attack',18)">⚡ Quick Attack <small>Basic attack · 18 power</small></button><button class="btn" onclick="attack('Element Burst',25)">💥 Element Burst <small>Strong attack · 25 power</small></button><button class="btn gold" onclick="transform('Mega Evolution')">💎 Mega Evolution <small>Boost your next attack</small></button><button class="btn gold" onclick="transform('Z-Move')">☀️ Z-Move <small>Powerful once-per-battle attack</small></button><button class="btn red" onclick="transform('Dynamax')">🌋 Dynamax <small>Boost your next attack</small></button><button class="btn red" onclick="transform('Gigantamax')">🌋 Gigantamax <small>Supported G-Max forms only</small></button><button class="btn" onclick="transform('Terastallization')">🔮 Terastallize <small>Crystal form effect</small></button><button class="btn" onclick="restoreNormalForm()">↩️ Normal Form <small>Reset transformation picture</small></button></div>
+<div class="box"><h3>Quick items</h3><div class="row"><button class="btn green" onclick="useBerry()">🍓 Use Berry (heal 25)</button><button class="btn green" onclick="usePotion()">🧪 Use Potion (heal 55)</button><button class="btn" onclick="throwBall()">🔴 Throw Poké Ball</button></div></div>
+</section>
+<section class="page" id="gyms">
+<div class="sectionhead"><h2>🏆 Gym Challenge</h2><span class="muted">Win battles to earn badges</span></div><div class="grid" id="gymGrid"></div><div class="notice">Gym battles use simplified prototype combat. Gym rewards and badge progress are saved locally in this browser.</div>
+</section>
+</main>
+<div class="footer">Fan-made, unofficial prototype. Pokémon names and artwork are associated with their respective owners. Not affiliated with or connected to Nintendo, Game Freak, or The Pokémon Company.</div>
+<script>
+const starterDex=[
+[25,'Pikachu','Electric',100,20],[1,'Bulbasaur','Grass',110,17],[4,'Charmander','Fire',95,22],[7,'Squirtle','Water',115,16],[133,'Eevee','Normal',100,18],[39,'Jigglypuff','Fairy',120,14],[37,'Vulpix','Fire',95,20],[58,'Growlithe','Fire',105,21],[150,'Mewtwo','Psychic',145,29],[143,'Snorlax','Normal',150,23],[149,'Dragonite','Dragon',140,28],[94,'Gengar','Ghost',105,26],[6,'Charizard','Fire',125,27],[448,'Lucario','Fighting',115,25],[384,'Rayquaza','Dragon',155,31],[700,'Sylveon','Fairy',120,22],[778,'Mimikyu','Ghost',100,24],[144,'Articuno','Ice',130,26],[145,'Zapdos','Electric',130,28],[146,'Moltres','Fire',130,28],[249,'Lugia','Psychic',155,30],[250,'Ho-Oh','Fire',155,30],[483,'Dialga','Dragon',160,31],[484,'Palkia','Water',155,31]];
+const regionalDex=[
+  [1,'Bulbasaur','Grass/Poison'],
+  [2,'Ivysaur','Grass/Poison'],
+  [3,'Venusaur','Grass/Poison'],
+  [4,'Charmander','Fire'],
+  [5,'Charmeleon','Fire'],
+  [6,'Charizard','Fire/Flying'],
+  [7,'Squirtle','Water'],
+  [8,'Wartortle','Water'],
+  [9,'Blastoise','Water'],
+  [10,'Caterpie','Bug'],
+  [11,'Metapod','Bug'],
+  [12,'Butterfree','Bug/Flying'],
+  [13,'Weedle','Bug/Poison'],
+  [14,'Kakuna','Bug/Poison'],
+  [15,'Beedrill','Bug/Poison'],
+  [16,'Pidgey','Normal/Flying'],
+  [17,'Pidgeotto','Normal/Flying'],
+  [18,'Pidgeot','Normal/Flying'],
+  [19,'Rattata','Normal'],
+  [20,'Raticate','Normal'],
+  [21,'Spearow','Normal/Flying'],
+  [22,'Fearow','Normal/Flying'],
+  [23,'Ekans','Poison'],
+  [24,'Arbok','Poison'],
+  [25,'Pikachu','Electric'],
+  [26,'Raichu','Electric'],
+  [27,'Sandshrew','Ground'],
+  [28,'Sandslash','Ground'],
+  [29,'Nidoran♀','Poison'],
+  [30,'Nidorina','Poison'],
+  [31,'Nidoqueen','Poison/Ground'],
+  [32,'Nidoran♂','Poison'],
+  [33,'Nidorino','Poison'],
+  [34,'Nidoking','Poison/Ground'],
+  [35,'Clefairy','Fairy'],
+  [36,'Clefable','Fairy'],
+  [37,'Vulpix','Fire'],
+  [38,'Ninetales','Fire'],
+  [39,'Jigglypuff','Normal/Fairy'],
+  [40,'Wigglytuff','Normal/Fairy'],
+  [41,'Zubat','Poison/Flying'],
+  [42,'Golbat','Poison/Flying'],
+  [43,'Oddish','Grass/Poison'],
+  [44,'Gloom','Grass/Poison'],
+  [45,'Vileplume','Grass/Poison'],
+  [46,'Paras','Bug/Grass'],
+  [47,'Parasect','Bug/Grass'],
+  [48,'Venonat','Bug/Poison'],
+  [49,'Venomoth','Bug/Poison'],
+  [50,'Diglett','Ground'],
+  [51,'Dugtrio','Ground'],
+  [52,'Meowth','Normal'],
+  [53,'Persian','Normal'],
+  [54,'Psyduck','Water'],
+  [55,'Golduck','Water'],
+  [56,'Mankey','Fighting'],
+  [57,'Primeape','Fighting'],
+  [58,'Growlithe','Fire'],
+  [59,'Arcanine','Fire'],
+  [60,'Poliwag','Water'],
+  [61,'Poliwhirl','Water'],
+  [62,'Poliwrath','Water/Fighting'],
+  [63,'Abra','Psychic'],
+  [64,'Kadabra','Psychic'],
+  [65,'Alakazam','Psychic'],
+  [66,'Machop','Fighting'],
+  [67,'Machoke','Fighting'],
+  [68,'Machamp','Fighting'],
+  [69,'Bellsprout','Grass/Poison'],
+  [70,'Weepinbell','Grass/Poison'],
+  [71,'Victreebel','Grass/Poison'],
+  [72,'Tentacool','Water/Poison'],
+  [73,'Tentacruel','Water/Poison'],
+  [74,'Geodude','Rock/Ground'],
+  [75,'Graveler','Rock/Ground'],
+  [76,'Golem','Rock/Ground'],
+  [77,'Ponyta','Fire'],
+  [78,'Rapidash','Fire'],
+  [79,'Slowpoke','Water/Psychic'],
+  [80,'Slowbro','Water/Psychic'],
+  [81,'Magnemite','Electric/Steel'],
+  [82,'Magneton','Electric/Steel'],
+  [83,'Farfetch\'d','Normal/Flying'],
+  [84,'Doduo','Normal/Flying'],
+  [85,'Dodrio','Normal/Flying'],
+  [86,'Seel','Water'],
+  [87,'Dewgong','Water/Ice'],
+  [88,'Grimer','Poison'],
+  [89,'Muk','Poison'],
+  [90,'Shellder','Water'],
+  [91,'Cloyster','Water/Ice'],
+  [92,'Gastly','Ghost/Poison'],
+  [93,'Haunter','Ghost/Poison'],
+  [94,'Gengar','Ghost/Poison'],
+  [95,'Onix','Rock/Ground'],
+  [96,'Drowzee','Psychic'],
+  [97,'Hypno','Psychic'],
+  [98,'Krabby','Water'],
+  [99,'Kingler','Water'],
+  [100,'Voltorb','Electric'],
+  [101,'Electrode','Electric'],
+  [102,'Exeggcute','Grass/Psychic'],
+  [103,'Exeggutor','Grass/Psychic'],
+  [104,'Cubone','Ground'],
+  [105,'Marowak','Ground'],
+  [106,'Hitmonlee','Fighting'],
+  [107,'Hitmonchan','Fighting'],
+  [108,'Lickitung','Normal'],
+  [109,'Koffing','Poison'],
+  [110,'Weezing','Poison'],
+  [111,'Rhyhorn','Ground/Rock'],
+  [112,'Rhydon','Ground/Rock'],
+  [113,'Chansey','Normal'],
+  [114,'Tangela','Grass'],
+  [115,'Kangaskhan','Normal'],
+  [116,'Horsea','Water'],
+  [117,'Seadra','Water'],
+  [118,'Goldeen','Water'],
+  [119,'Seaking','Water'],
+  [120,'Staryu','Water'],
+  [121,'Starmie','Water/Psychic'],
+  [122,'Mr. Mime','Psychic/Fairy'],
+  [123,'Scyther','Bug/Flying'],
+  [124,'Jynx','Ice/Psychic'],
+  [125,'Electabuzz','Electric'],
+  [126,'Magmar','Fire'],
+  [127,'Pinsir','Bug'],
+  [128,'Tauros','Normal'],
+  [129,'Magikarp','Water'],
+  [130,'Gyarados','Water/Flying'],
+  [131,'Lapras','Water/Ice'],
+  [132,'Ditto','Normal'],
+  [133,'Eevee','Normal'],
+  [134,'Vaporeon','Water'],
+  [135,'Jolteon','Electric'],
+  [136,'Flareon','Fire'],
+  [137,'Porygon','Normal'],
+  [138,'Omanyte','Rock/Water'],
+  [139,'Omastar','Rock/Water'],
+  [140,'Kabuto','Rock/Water'],
+  [141,'Kabutops','Rock/Water'],
+  [142,'Aerodactyl','Rock/Flying'],
+  [143,'Snorlax','Normal'],
+  [144,'Articuno','Ice/Flying'],
+  [145,'Zapdos','Electric/Flying'],
+  [146,'Moltres','Fire/Flying'],
+  [147,'Dratini','Dragon'],
+  [148,'Dragonair','Dragon'],
+  [149,'Dragonite','Dragon/Flying'],
+  [150,'Mewtwo','Psychic'],
+  [151,'Mew','Psychic'],
+  [808,'Meltan','Steel'],
+  [809,'Melmetal','Steel']
+];
+const art=id=>`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+const regionalEntries=regionalDex.map(([id,name,type])=>({id,name,type,hp:80+(id%7)*10,atk:12+(id%9)*2}));
+// Keep the existing featured roster's tuned stats, while adding every Kanto entry and Meltan/Melmetal.
+let dex=[...regionalEntries,...starterDex.map(([id,name,type,hp,atk])=>({id,name,type,hp,atk}))]
+  .reduce((acc,p)=>{const i=acc.findIndex(x=>x.id===p.id);if(i<0)acc.push(p);else if(starterDex.some(r=>r[0]===p.id))acc[i]=p;return acc;},[]);
+let state={coins:100,berries:5,balls:10,potions:3,badges:0,caught:[{id:25,name:'Pikachu',type:'Electric',hp:100,atk:20,level:8,cur:100},{id:1,name:'Bulbasaur',type:'Grass',hp:110,atk:17,level:5,cur:110},{id:4,name:'Charmander',type:'Fire',hp:95,atk:22,level:5,cur:95}],team:[25,1,4],wins:0,settings:{mega:true,z:true,dyna:true,tera:true},custom:[]};
+let enemy=null,enemyCur=0,isGym=false,transformBoost=0,zUsed=false,activeId=25,activeForm=null;
+const places=[{name:'Pallet Town',emoji:'🏡',desc:'A quiet seaside hometown and the start of your journey.',types:['Normal','Electric','Grass','Fire','Water'],ids:[25,1,4,7,133]},{name:'Viridian Forest',emoji:'🌳',desc:'A deep green forest filled with bugs and forest Pokémon.',types:['Grass','Bug','Poison'],ids:[1,3,94,778]},{name:'Pewter City',emoji:'🪨',desc:'A rocky city known for its first Gym challenge.',types:['Rock','Ground'],ids:[143,6,448]},{name:'Mt. Moon',emoji:'🌙',desc:'A mysterious cave with rare Pokémon and hidden treasures.',types:['Rock','Fairy','Steel'],ids:[39,808,809,150]},{name:'Cerulean City',emoji:'💧',desc:'A bright waterside city with rivers and waterfalls.',types:['Water','Ice'],ids:[7,144,145,484]},{name:'Vermilion Port',emoji:'🚢',desc:'A busy harbor where electric Pokémon gather near the docks.',types:['Electric','Water'],ids:[25,145,7]},{name:'Celadon Gardens',emoji:'🌸',desc:'A colorful garden full of grass and fairy Pokémon.',types:['Grass','Fairy'],ids:[1,3,700,133]},{name:'Safari Zone',emoji:'🦒',desc:'A wild reserve where unusual Pokémon roam.',types:['Normal','Ground','Flying'],ids:[143,149,133,384]},{name:'Indigo Plateau',emoji:'🏟️',desc:'The grand arena for the strongest trainers and legendary encounters.',types:['Dragon','Psychic','Fire'],ids:[150,384,149,249,250]},{name:'Galar Power Spot',emoji:'⚡',desc:'A powerful stadium where Gigantamax energy fills the air.',types:['Electric','Ghost','Normal'],ids:[25,94,143,6]}];
+let currentPlace=places[0];
+const $=id=>document.getElementById(id);
+function allDex(){return [...dex,...state.custom]}
+function findDex(id){return allDex().find(p=>Number(p.id)===Number(id))}
+function caught(){return state.caught}
+function activeMon(){return caught().find(p=>Number(p.id)===Number(activeId)&&state.team.some(id=>Number(id)===Number(p.id)))||caught().find(p=>state.team.some(id=>Number(id)===Number(p.id)))||caught()[0]}
+function img(id,name){return `<img loading="lazy" src="${art(id)}" alt="${name}" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png'">`}
+function go(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===page));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='battle')renderBattle();if(page==='bag')renderBag();if(page==='pokedex')renderDex();if(page==='gyms')renderGyms();if(page==='home')renderHome();if(page==='map')renderMap()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.page));
+function saveGame(show=false){try{localStorage.setItem('ultimatePokemonRPG',JSON.stringify(state));if(show)msg('Game saved locally in this browser.')}catch(e){msg('Could not save; browser storage may be disabled.')};renderHeader()}
+function loadGame(){try{const s=JSON.parse(localStorage.getItem('ultimatePokemonRPG'));if(s&&Array.isArray(s.caught)&&Array.isArray(s.team)){state={...state,...s,settings:{...state.settings,...(s.settings||{})},coins:Number.isFinite(s.coins)?s.coins:100,berries:Number.isFinite(s.berries)?s.berries:5,balls:Number.isFinite(s.balls)?s.balls:10,potions:Number.isFinite(s.potions)?s.potions:3,badges:Number.isFinite(s.badges)?s.badges:0};state.caught=state.caught.map(m=>({...m,hp:Number.isFinite(m.hp)?m.hp:100,cur:Number.isFinite(m.cur)?m.cur:(Number.isFinite(m.hp)?m.hp:100),level:Number.isFinite(m.level)?m.level:5,atk:Number.isFinite(m.atk)?m.atk:15}));state.team=state.team.map(Number).filter(id=>state.caught.some(m=>Number(m.id)===id)).slice(0,6);if(!state.team.length&&state.caught.length)state.team=[Number(state.caught[0].id)];if(!state.caught.length){state.caught=[{id:25,name:'Pikachu',type:'Electric',hp:100,atk:20,level:8,cur:100}];state.team=[25]}}}catch(e){}}
+function renderHeader(){['coins','berries','balls','badges'].forEach(k=>$(k).textContent=state[k])}
+function monCard(p,extra=''){return `<div class="card mon" onclick="inspectPokemon(${Number(p.id)})">${img(p.id,p.name)}<h3>${p.name}</h3><span class="tag">${p.type||'Unknown'}</span><div class="muted">HP ${p.hp} · ATK ${p.atk}</div>${extra}</div>`}
+function renderHome(){$('featured').innerHTML=[25,6,150,384,700,133].map(id=>findDex(id)).filter(Boolean).map(p=>monCard(p)).join('');$('homeTeam').innerHTML=state.team.map(id=>caught().find(p=>p.id===id)).filter(Boolean).map(p=>monCard(p,`<span class="tag">Lv. ${p.level}</span>`)).join('')||'<div class="empty">Choose Pokémon from your caught collection.</div>';renderHeader()}
+function renderDex(){let q=($('search').value||'').toLowerCase(),t=$('typeFilter').value;let list=allDex().filter(p=>p.name.toLowerCase().includes(q)&&(!t||(p.type||'').split('/').includes(t)));$('dexCount').textContent=list.length+' Pokémon shown';$('dexGrid').innerHTML=list.map(p=>monCard(p,`<button class="btn small primary" onclick="event.stopPropagation();catchFromLibrary(${p.id})">Add to team</button>`)).join('')||'<div class="empty">No Pokémon found.</div>'}
+function renderBag(){$('caughtGrid').innerHTML=caught().map(p=>monCard(p,`<span class="tag">Lv. ${p.level}</span><div class="row" style="justify-content:center;margin-top:6px"><button class="btn small ${state.team.includes(p.id)?'green':'primary'}" onclick="event.stopPropagation();toggleTeam(${p.id})">${state.team.includes(p.id)?'In team':'Add to team'}</button><button class="btn small" onclick="event.stopPropagation();setActive(${p.id})">Use</button></div>`)).join('')||'<div class="empty">You have not caught any Pokémon yet. Find a wild Pokémon in Battle.</div>';
+$('itemsPanel').innerHTML=[['balls','🔴 Poké Balls'],['berries','🍓 Berries'],['potions','🧪 Potions']].map(([k,n])=>`<div class="box row" style="justify-content:space-between"><b>${n}</b><span>${state[k]}</span><button class="btn small" onclick="${k==='berries'?'useBerry()':k==='potions'?'usePotion()':'throwBall()'}">Use</button></div>`).join('');renderHeader()}
+function inspectPokemon(id){let p=findDex(id);if(!p)return;alert(`${p.name}\nType: ${p.type}\nBase HP: ${p.hp}\nAttack: ${p.atk}\n${caught().some(c=>c.id===p.id)?'In your caught collection':'Not caught yet'}\n\nUse the battle screen to catch wild Pokémon.`)}
+function catchFromLibrary(id){const existing=caught().find(p=>Number(p.id)===Number(id));if(existing){if(state.team.includes(existing.id)){battleLog(existing.name+' is already on your team.');go('battle');return}if(state.team.length>=6){alert('Your team is full. Remove a Pokémon from your team first.');return}state.team.push(existing.id);activeId=existing.id;activeForm=null;saveGame();renderBag();renderHome();renderBattle();battleLog(existing.name+' joined your team!');return}const base=findDex(id);if(!base){alert('That Pokémon could not be found in the Pokédex.');return}if(state.team.length>=6){alert('Your team is full. Remove a Pokémon from your team first.');return}const mon={...base,level:5,cur:base.hp,hp:base.hp};state.caught.push(mon);state.team.push(mon.id);activeId=mon.id;activeForm=null;saveGame();renderDex();renderBag();renderHome();renderBattle();battleLog(mon.name+' was added to your collection and team!')}
+function toggleTeam(id){if(!caught().some(p=>p.id===id))return;if(state.team.includes(id)){if(state.team.length===1){alert('Keep at least one Pokémon in your team.');return}state.team=state.team.filter(x=>x!==id)}else{if(state.team.length>=6){alert('Your battle team can hold up to six Pokémon.');return}state.team.push(id)}if(!state.team.includes(activeId))activeId=state.team[0];saveGame();renderBag();renderHome()}
+function setActive(id){if(!state.team.includes(id)){if(state.team.length>=6){alert('Your team is full. Remove someone first.');return}state.team.push(id)}activeId=id;activeForm=null;saveGame();renderBag();renderBattle()}
+function newWild(){let pool=allDex().filter(p=>![...state.team].includes(p.id));let p=pool[Math.floor(Math.random()*pool.length)]||findDex(37);enemy={...p,level:4+Math.floor(Math.random()*8),hp:p.hp,atk:p.atk};enemyCur=enemy.hp;isGym=false;transformBoost=0;zUsed=false;activeForm=null;go('battle');$('battleLog').textContent=`A wild ${enemy.name} appeared! Weaken it and try to catch it.`;renderBattle()}
+function gymBattle(index){if(index===undefined)index=Math.min(state.badges,7);let gyms=[['Brock','Rock',143],['Misty','Water',7],['Lt. Surge','Electric',25],['Erika','Grass',1],['Koga','Ghost',94],['Sabrina','Psychic',150],['Blaine','Fire',6],['Blue','Dragon',149]];let g=gyms[index];enemy={...findDex(g[2]),name:g[0]+'’s '+findDex(g[2]).name,level:8+index*3,hp:100+index*15,atk:18+index*2};enemyCur=enemy.hp;isGym=true;transformBoost=0;zUsed=false;activeForm=null;go('battle');$('battleLog').textContent=`Gym challenge: ${g[0]} sends out ${enemy.name}!`;renderBattle()}
+const formArtwork={
+  3:{mega:{name:"Mega Venusaur",id:10033}},
+  6:{mega:{name:"Mega Charizard X",id:10034},gmax:{name:"Gigantamax Charizard",id:10196}},
+  9:{mega:{name:"Mega Blastoise",id:10036}},
+  25:{gmax:{name:"Gigantamax Pikachu",id:10100}},
+  94:{mega:{name:"Mega Gengar",id:10038},gmax:{name:"Gigantamax Gengar",id:10202}},
+  143:{gmax:{name:"Gigantamax Snorlax",id:10204}},
+  448:{mega:{name:"Mega Lucario",id:10059}},
+  150:{mega:{name:"Mega Mewtwo X",id:10043}},
+  384:{mega:{name:"Mega Rayquaza",id:10079}}
+};
+function restoreNormalForm(){activeForm=null;const p=activeMon();if(p){$('playerImg').classList.remove('tera-active');$('playerImg').onerror=null;renderBattle();battleLog(p.name+' returned to its normal form. Transformations are temporary and never evolve or replace your Pokémon.')}}
+function applyPictureForm(kind){const p=activeMon();if(!p)return false;const baseId=Number(p.id);const entry=formArtwork[baseId];const form=entry&&(kind==='mega'?entry.mega:entry.gmax);if(!form){battleLog(`${p.name} does not have a supported ${kind==='gmax'?'Gigantamax':'Mega Evolution'} form in this game.`);return false;}if(activeForm&&activeForm.baseId!==Number(p.id))activeForm=null;activeForm={kind,name:form.name,id:form.id,baseId:baseId};renderBattle();return true}
+function renderBattle(){let p=activeMon();if(p){$('playerImg').onerror=()=>{if(activeForm&&activeForm.baseId===Number(p.id)){const badForm=activeForm;activeForm=null;$('playerImg').onerror=null;$('playerImg').src=art(p.id);battleLog(`${badForm.name} artwork was unavailable. ${p.name} stays the same Pokémon; no evolution occurred.`);$('playerName').textContent=p.name;}};$('playerImg').src=activeForm&&Number(activeForm.baseId)===Number(p.id)&&activeForm.kind!=='tera'?art(activeForm.id):art(p.id);$('playerImg').classList.toggle('tera-active',!!(activeForm&&activeForm.kind==='tera'));$('playerName').textContent=activeForm&&Number(activeForm.baseId)===Number(p.id)&&activeForm.kind!=='tera'?`${p.name} · ${activeForm.kind==='gmax'?'Gigantamax form':'Mega form'}`:(p.name+(activeForm&&activeForm.kind==='tera'?' ✨ Terastallized':''));$('playerStats').textContent=`Lv. ${p.level} · ${Math.max(0,p.cur)}/${p.hp} HP`;$('playerHp').style.width=Math.max(0,p.cur/p.hp*100)+'%'}if(enemy){$('enemyImg').src=art(findDex(enemy.id)?.id||enemy.id);$('enemyName').textContent=enemy.name;$('enemyStats').textContent=`Lv. ${enemy.level} · ${Math.max(0,enemyCur)}/${enemy.hp} HP`;$('enemyHp').style.width=Math.max(0,enemyCur/enemy.hp*100)+'%';$('enemyLabel').textContent=isGym?'Gym Leader Battle':'Wild Pokémon'}else{$('enemyImg').removeAttribute('src');$('enemyName').textContent='No opponent';$('enemyStats').textContent='Find a wild Pokémon or challenge a gym';$('enemyHp').style.width='0%'}}
+function battleLog(s){$('battleLog').textContent=s}
+function attack(name,power){if(!enemy){battleLog('Find a wild Pokémon first.');return}let p=activeMon();if(!p||p.cur<=0){battleLog('Your active Pokémon has fainted. Switch Pokémon or use an item.');return}let dmg=Math.round((p.atk*power/20+transformBoost)*(0.8+Math.random()*.4));enemyCur=Math.max(0,enemyCur-dmg);transformBoost=0;if(enemyCur<=0){if(isGym){state.badges=Math.min(8,state.badges+1);state.coins+=50;battleLog(`Victory! Gym battle won. You earned a badge and 50 coins.`)}else{state.coins+=20;battleLog(`Victory! You defeated ${enemy.name} and earned 20 coins. Visit the Bag to buy healing items and Poké Balls.`)}state.wins++;p.cur=Math.min(p.hp,p.cur+10);p.level++;activeForm=null;transformBoost=0;enemy=null;isGym=false;saveGame();renderBattle();renderHome();renderGyms();return}let retaliation=Math.max(4,Math.round(enemy.atk*(.45+Math.random()*.25)));p.cur=Math.max(0,p.cur-retaliation);battleLog(`${p.name} used ${name} for ${dmg} damage. ${enemy.name} retaliated for ${retaliation}.`);if(p.cur<=0){let next=state.team.map(id=>caught().find(m=>m.id===id)).find(m=>m&&m.cur>0);if(next){activeId=next.id;battleLog(`${p.name} fainted! Go, ${next.name}!`)}else{caught().forEach(m=>m.cur=m.hp);battleLog('Your team recovered at the Pokémon Center.')}}saveGame();renderBattle();renderBag()}
+function transform(type){if(!enemy){battleLog('Find an opponent first.');return}let p=activeMon();if(!p)return;if(type==='Z-Move'){if(zUsed){battleLog('You have already used a Z-Move this battle.');return}zUsed=true;attack('Z-Move',55);return}if(type==='Mega Evolution'){if(!applyPictureForm('mega'))return;transformBoost+=18;battleLog(`${p.name} became ${activeForm.name}! Its next attack is boosted.`);return}if(type==='Gigantamax'){if(!applyPictureForm('gmax'))return;transformBoost+=25;battleLog(`${p.name} Gigantamaxed into its special battle form (${activeForm.name}). It is still ${p.name}; this is temporary and does not evolve or replace it. Its next attack is boosted.`);return}if(type==='Terastallization'){activeForm={kind:'tera',name:p.name,baseId:p.id};transformBoost+=18;renderBattle();battleLog(`${p.name} Terastallized! Crystal effects are active and its next attack is boosted.`);return}if(type==='Dynamax'){transformBoost+=25;battleLog(`${p.name} Dynamaxed! Its next attack is boosted.`);renderBattle()}}
+function throwBall(){if(!enemy){battleLog('Find a wild Pokémon first.');return}if(isGym){battleLog('Gym Leader Pokémon cannot be caught in this prototype.');return}if(state.balls<=0){battleLog('No Poké Balls left. Buy more in your Bag.');return}state.balls--;let chance=.25+(1-enemyCur/enemy.hp)*.65;if(Math.random()<chance){let base=findDex(enemy.id)||enemy;let caughtMon={...base,level:enemy.level,cur:enemy.hp,hp:enemy.hp,atk:enemy.atk};if(caught().some(p=>p.id===caughtMon.id)){state.coins+=10;battleLog(`You caught ${caughtMon.name}, but already own one! You earned 10 coins.`)}else{state.caught.push(caughtMon);if(state.team.length<6)state.team.push(caughtMon.id);battleLog(`Gotcha! ${caughtMon.name} was caught and added to your Bag!`)}enemy=null;saveGame();renderBag();renderHome()}else{battleLog('Oh no! The Pokémon broke free. Weaken it and try again.');let p=activeMon();p.cur=Math.max(0,p.cur-Math.max(3,Math.round(enemy.atk*.25)))}saveGame();renderBattle()}
+function useBerry(){let p=activeMon();if(!p||state.berries<=0){battleLog('No berries available.');return}if(p.cur>=p.hp){battleLog(p.name+' is already at full HP.');return}state.berries--;p.cur=Math.min(p.hp,p.cur+25);battleLog(`${p.name} ate a berry and recovered HP.`);saveGame();renderBattle();renderBag()}
+function usePotion(){let p=activeMon();if(!p||state.potions<=0){battleLog('No Potions available.');return}if(p.cur>=p.hp){battleLog(p.name+' is already at full HP.');return}state.potions--;p.cur=Math.min(p.hp,p.cur+55);battleLog(`${p.name} used a Potion.`);saveGame();renderBattle();renderBag()}
+function buy(k){let price={balls:20,berries:15,potions:25}[k],qty={balls:5,berries:3,potions:2}[k];if(state.coins<price){alert('Not enough coins. Win battles to earn more.');return}state.coins-=price;state[k]+=qty;saveGame();renderBag()}
+function renderMap(){if(!$('worldMapGrid'))return;$('currentPlaceTitle').textContent=currentPlace.name;$('currentPlaceDesc').textContent=currentPlace.desc;$('worldMapGrid').innerHTML=places.map((pl,i)=>`<button class="place ${pl.name===currentPlace.name?'active-place':''}" onclick="selectPlace(${i})"><span class="emoji">${pl.emoji}</span><b>${pl.name}</b><small>${pl.desc}</small></button>`).join('')}
+function selectPlace(i){currentPlace=places[i]||places[0];renderMap()}
+function explorePlace(){const pool=allDex().filter(p=>currentPlace.ids.includes(Number(p.id)));const available=pool.length?pool:allDex();const p=available[Math.floor(Math.random()*available.length)];enemy={...p,level:4+Math.floor(Math.random()*10),hp:p.hp,atk:p.atk};enemyCur=enemy.hp;isGym=false;transformBoost=0;zUsed=false;activeForm=null;go('battle');battleLog(`Exploring ${currentPlace.name}! A wild ${enemy.name} appeared!`);renderBattle()}
+function renderGyms(){let names=['Brock · Pewter','Misty · Cerulean','Lt. Surge · Vermilion','Erika · Celadon','Koga · Fuchsia','Sabrina · Saffron','Blaine · Cinnabar','Blue · Viridian'];$('gymGrid').innerHTML=names.map((n,i)=>`<div class="card"><span class="badge">${i<state.badges?'✓ Badge earned':'Badge '+(i+1)}</span><h3>${n}</h3><p class="muted">Challenge the leader to earn coins and a badge.</p><button class="btn ${i>state.badges?'':'primary'}" onclick="gymBattle(${i})" ${i>state.badges?'disabled':''}>${i<state.badges?'Battle again':i===state.badges?'Challenge Gym':'Locked'}</button></div>`).join('')}
+function renderAll(){renderHeader();renderHome();renderDex();renderBag();renderGyms();renderBattle()}
+loadGame();renderAll();renderMap();if(!enemy){$('enemyName').textContent='No opponent';$('enemyImg').removeAttribute('src')}
+</script>
+</body>
+</html>
